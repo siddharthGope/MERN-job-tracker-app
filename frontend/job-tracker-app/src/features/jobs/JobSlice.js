@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:6200/jobs";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // get token from localStorage
 
