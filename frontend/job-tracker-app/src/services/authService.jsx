@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:6200'
+const API_URL = 'VITE_API_BASE_URL'
 
 export const register = async (userData) => {
     return axios.post(`${API_URL}/register`, userData)

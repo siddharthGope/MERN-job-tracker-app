@@ -11,7 +11,8 @@ const app = express();
 const PORT = process.env.PORT || 6200;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      "https://mern-job-tracker-app-786g-3y322z0uo-siddharth-gopes-projects.vercel.app/",
   })
 );
 
