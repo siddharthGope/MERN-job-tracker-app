@@ -12,7 +12,8 @@ import {
     Tooltip
 } from 'chart.js';
 import { Bar, Line, Pie } from 'react-chartjs-2';
-import { getJobs, selectJobsByDate, selectJobsByStatus } from '../../features/jobs/jobSlice';
+import { getJobs, selectJobsByDate, selectJobsByStatus } from '../../features/jobs/JobSlice';
+
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
 
