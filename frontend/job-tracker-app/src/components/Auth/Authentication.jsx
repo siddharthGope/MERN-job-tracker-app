@@ -59,96 +59,72 @@ function Authentication() {
         }
     }
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Register Card */}
-                <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center">
-                    <h1 className="text-2xl font-bold mb-6 text-blue-600">Register</h1>
-                    <form onSubmit={handleRegistration} className="w-full flex flex-col gap-4">
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={registrationData.username}
-                            onChange={e => setRegistrationData({ ...registrationData, username: e.target.value })}
-                            required
-                            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={registrationData.password}
-                            onChange={e => setRegistrationData({ ...registrationData, password: e.target.value })}
-                            required
-                            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        <button
-                            type="submit"
-                            className="bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
-                        >
-                            Register
-                        </button>
-                    </form>
-                    <p className="mt-4 text-green-600">{registrationMessage}</p>
-                </div>
-                {/* <div className=' bg-gray-300 h-dvh w-px flex-col'></div> */}
-                {/* Login Card */}
-                <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center">
-                    <h1 className="text-2xl font-bold mb-6 text-blue-600">Login</h1>
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={loginData.username}
-                            onChange={e => setLoginData({ ...loginData, username: e.target.value })}
-                            required
-                            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={loginData.password}
-                            onChange={e => setLoginData({ ...loginData, password: e.target.value })}
-                            required
-                            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        <button
-                            type="submit"
-                            className="bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
-                        >
-                            Login
-                        </button>
-                    </form>
-                    <p className="mt-4 text-green-600">{message}</p>
+        <div className='min-h-screen bg-gray-100'>
+            <h1 className='pt-[5rem] text-bold text-center text-2xl'>Welcome to JobTracker web app! It helps users manage and track your job applications</h1>
+            <div className="flex items-center justify-center pt-[5rem]">
+                <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Register Card */}
+                    <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center mx-3">
+                        <h3 className="text-xl font-bold mb-6 text-[#3b82f6]">Register</h3>
+                        <form onSubmit={handleRegistration} className="w-full flex flex-col gap-4">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={registrationData.username}
+                                onChange={e => setRegistrationData({ ...registrationData, username: e.target.value })}
+                                required
+                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={registrationData.password}
+                                onChange={e => setRegistrationData({ ...registrationData, password: e.target.value })}
+                                required
+                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-[#3b82f6] text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+                            >
+                                Register
+                            </button>
+                        </form>
+                        <p className="mt-4 text-green-600">{registrationMessage}</p>
+                    </div>
+                    {/* <div className=' bg-gray-300 h-dvh w-px flex-col'></div> */}
+                    {/* Login Card */}
+                    <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center mx-3">
+                        <h3 className="text-xl font-bold mb-6 text-[#10b981]">Login</h3>
+                        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={loginData.username}
+                                onChange={e => setLoginData({ ...loginData, username: e.target.value })}
+                                required
+                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={loginData.password}
+                                onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+                                required
+                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-[#10b981] text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+                            >
+                                Login
+                            </button>
+                        </form>
+                        <p className="mt-4 text-green-600">{message}</p>
+                    </div>
                 </div>
             </div>
         </div>
-        // <div>
-        //     <div>
-        //         <h1>Login</h1>
-
-        //         <form onSubmit={handleSubmit}>
-        //             <input type="text" placeholder='Username' value={loginData.username} onChange={e => setLoginData({ ...loginData, username: e.target.value })} required />
-        //             <input type="password" placeholder='Password' value={loginData.password} onChange={e => setLoginData({ ...loginData, password: e.target.value })} required />
-
-        //             <button type='submit'>Login</button>
-
-        //         </form>
-        //         <p>{message}</p>
-        //     </div>
-        //     <div>
-        //         <h1>Register</h1>
-        //         <form onSubmit={handleRegistration}>
-        //             <input type="text" placeholder='Username' value={registrationData.username}
-        //                 onChange={e => setRegistrationData({ ...registrationData, username: e.target.value })} required />
-
-        //             <input type="password" placeholder='Password' value={registrationData.password}
-        //                 onChange={e => setRegistrationData({ ...registrationData, password: e.target.value })} required />
-
-        //             <button type='submit'>Register</button>
-        //         </form>
-        //         <p>{registrationMessage}</p>
-        //     </div>
-        // </div>
     )
 }
 

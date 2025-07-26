@@ -38,10 +38,10 @@ function Dashboard() {
 
 
     return (
-        <div className="grid md:grid-cols-2 gap-8 mt-8">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-8">
             {/* Pie Chart – Status */}
             <div className="bg-white p-4 rounded-xl shadow">
-                <h2 className="text-xl font-semibold mb-2">Status Distribution</h2>
+                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Status Distribution</h2>
 
                 <Pie
                     data={{
@@ -59,7 +59,7 @@ function Dashboard() {
             {/* Bar Chart – Status Count */}
 
             <div className="bg-white p-4 rounded-xl shadow">
-                <h2 className="text-xl font-semibold mb-2">Applications by Status</h2>
+                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Applications by Status</h2>
 
                 <Bar data={{
                     labels: statusLabels,
@@ -67,7 +67,7 @@ function Dashboard() {
                         {
                             label: "Count",
                             data: statusData,
-                            backgroundColor: "#3b82f6",
+                            backgroundColor: ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"],
                         }
                     ]
                 }} />
@@ -76,7 +76,7 @@ function Dashboard() {
             {/* Line Chart – Over Time */}
 
             <div className="col-span-2 bg-white p-4 rounded-xl shadow">
-                <h2 className="text-xl font-semibold mb-2">Applications Over Time</h2>
+                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Applications Over Time</h2>
 
                 <Line
                     data={{
