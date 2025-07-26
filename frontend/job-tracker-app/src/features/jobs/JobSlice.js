@@ -17,25 +17,20 @@ const getAuthHeader = () => ({
 
 //Thunk
 
-export const getJobs = createAsyncThunk("/all-jobs", async () => {
-  const result = await axios.post(`${BASE_URL}/all-jobs`, {}, getAuthHeader());
+export const getJobs = createAsyncThunk("/jobs/all-jobs", async () => {
+  const result = await axios.post(
+    `${BASE_URL}/jobs/all-jobs`,
+    {},
+    getAuthHeader()
+  );
   return result.data;
 });
 
-export const createJob = createAsyncThunk("/create-job", async (jobData) => {
-  const response = await axios.post(
-    `${BASE_URL}/create-job`,
-    jobData,
-    getAuthHeader()
-  );
-  return response.data;
-});
-
-export const updateJob = createAsyncThunk(
-  "/update",
-  async ({ id, ...jobData }) => {
-    const response = await axios.put(
-      `${BASE_URL}/update/${id}`,
+export const createJob = createAsyncThunk(
+  "/jobs/create-job",
+  async (jobData) => {
+    const response = await axios.post(
+      `${BASE_URL}/jobs/create-job`,
       jobData,
       getAuthHeader()
     );
@@ -43,9 +38,21 @@ export const updateJob = createAsyncThunk(
   }
 );
 
-export const deleteJob = createAsyncThunk("/delete", async (id) => {
+export const updateJob = createAsyncThunk(
+  "/jobs/update",
+  async ({ id, ...jobData }) => {
+    const response = await axios.put(
+      `${BASE_URL}/jobs/update/${id}`,
+      jobData,
+      getAuthHeader()
+    );
+    return response.data;
+  }
+);
+
+export const deleteJob = createAsyncThunk("/jobs/delete", async (id) => {
   const response = await axios.delete(
-    `${BASE_URL}/delete/${id}`,
+    `${BASE_URL}/jobs/delete/${id}`,
     getAuthHeader()
   );
   return response.data;
