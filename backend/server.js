@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 6200;
 app.use(
   cors({
     origin: "https://mern-job-tracker-app-786g.vercel.app/",
+    credentials: true,
   })
 );
 
