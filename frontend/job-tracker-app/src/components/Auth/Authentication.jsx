@@ -60,6 +60,7 @@ function Authentication() {
     }
     return (
         <div className='min-h-screen bg-gray-100 bgauth'>
+            todo: todo form validation, land to all jobs page,conditional link show hide, change app name, more beautiful ui
             <h1 className='pt-[5rem] text-bold text-center text-2xl'>Welcome to JobTracker web app! It helps users manage and track your job applications</h1>
             <div className="flex items-center justify-center pt-[5rem]">
                 <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">

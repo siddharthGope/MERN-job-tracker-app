@@ -9,9 +9,19 @@ const jobRoutes = require("./routes/jobs");
 
 const app = express();
 const PORT = process.env.PORT || 6200;
+const allowedOrigin = [
+  "http://localhost:5173", // Vite local dev
+  "https://mern-job-tracker-app-786g.vercel.app", // Production frontend
+];
 app.use(
   cors({
-    origin: "https://mern-job-tracker-app-786g.vercel.app",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigin.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.error(new Error("Blocked by CORS"));
+      }
+    },
     credentials: true,
   })
 );
