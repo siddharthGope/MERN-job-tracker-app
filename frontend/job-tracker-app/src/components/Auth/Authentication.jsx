@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { login, logOut } from '../../services/authService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import { register } from '../../services/authService'
-function Authentication() {
+import Right from '../../assets/right-arrow-icon.png';
 
+
+
+function Authentication() {
 
     // Registration
     const [registrationData, setRegistrationData] = useState({ username: '', password: '' });
@@ -64,7 +67,7 @@ function Authentication() {
             <div className="flex items-center justify-center pt-[5rem]">
                 <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Register Card */}
-                    <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center mx-3">
+                    {/* <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center mx-3">
                         <h3 className="text-xl font-bold mb-6 text-[#3b82f6]">Register</h3>
                         <form onSubmit={handleRegistration} className="w-full flex flex-col gap-4">
                             <input
@@ -91,36 +94,42 @@ function Authentication() {
                             </button>
                         </form>
                         <p className="mt-4 text-green-600">{registrationMessage}</p>
-                    </div>
+                    </div> */}
                     {/* <div className=' bg-gray-300 h-dvh w-px flex-col'></div> */}
                     {/* Login Card */}
-                    <div className="bg-white h-full rounded-lg shadow-lg p-8 flex flex-col items-center mx-3">
-                        <h3 className="text-xl font-bold mb-6 text-[#10b981]">Login</h3>
-                        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                value={loginData.username}
-                                onChange={e => setLoginData({ ...loginData, username: e.target.value })}
-                                required
-                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            />
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                value={loginData.password}
-                                onChange={e => setLoginData({ ...loginData, password: e.target.value })}
-                                required
-                                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            />
-                            <button
-                                type="submit"
-                                className="bg-[#10b981] text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
-                            >
-                                Login
-                            </button>
-                        </form>
-                        <p className="mt-4 text-green-600">{message}</p>
+                    <div className="card-wrap card">
+                        <div className="auth-cards flex flex-col items-center mx-3">
+                            <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
+                            <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
+                            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+                                <p className="mt-4 text-gray-600">{message}</p>
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={loginData.username}
+                                    onChange={e => setLoginData({ ...loginData, username: e.target.value })}
+                                    required
+                                    className="inputs"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={loginData.password}
+                                    onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+                                    required
+                                    className="inputs"
+                                />
+                                <button
+                                    type="submit"
+                                    className="bg-[#4f46e5] submit-btn"
+                                >
+                                    <img src={Right} alt="" className='right-arr mr-2' />
+                                    Login
+                                </button>
+                            </form>
+
+                            <p className='mt-4 '><span className="text-gray-400 font-500">Don't have an account?</span> <Link to="/register" className='text-blue-600'>SignUp</Link> </p>
+                        </div>
                     </div>
                 </div>
             </div>

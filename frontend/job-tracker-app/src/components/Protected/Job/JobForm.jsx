@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { createJob, updateJob } from '../../../features/jobs/JobSlice';
+import Right from '../../../assets/right-arrow-icon.png';
 
 
 function JobForm({ editJob, onComplete }) {
@@ -44,7 +45,7 @@ function JobForm({ editJob, onComplete }) {
             <h2 className="text-xl font-semibold text-gray-800 mb-4 mt-4 text-center">
                 {editJob ? "Edit Job" : "Add Job"}
             </h2>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-2xl p-6 space-y-4 max-w-xl mx-auto border">
+            <form onSubmit={handleSubmit} className="card bg-white shadow-md space-y-4 max-w-xl mx-auto">
                 {/* Title */}
                 <div>
                     <label className="block mb-1 text-sm text-gray-600">Job Title</label>
@@ -81,7 +82,7 @@ function JobForm({ editJob, onComplete }) {
                         <option value='rejected'>Rejected</option>
                     </select>
                 </div>
-                <button type='submit'>{editJob ? 'Update' : 'Create'}</button>
+                <button type='submit' className='submit-btn bg-[#4f46e5]'> <span>{editJob ? 'Update' : 'Create'}</span> <img src={Right} alt="" className='right-arr ml-2' /> </button>
 
             </form>
         </div>

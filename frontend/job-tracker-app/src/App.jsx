@@ -155,8 +155,8 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Authentication />} />
-          <Route path="/login" element={<Authentication />} />
-          <Route path="/register" element={<Authentication />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path="/jobs" element={<Jobs />}></Route>

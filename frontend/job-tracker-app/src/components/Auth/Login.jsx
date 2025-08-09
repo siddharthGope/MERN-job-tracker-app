@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { login, logOut } from '../../services/authService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
+import Right from '../../assets/right-arrow-icon.png';
 
 
 function Login() {
@@ -44,18 +45,45 @@ function Login() {
 
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div className='min-h-screen bg-gray-100 bgauth'>
+            {/* todo: todo form validation, land to all jobs page,conditional link show hide, change app name, more beautiful ui */}
+            <div className="flex items-center justify-center h-[100vh]">
 
-            <form onSubmit={handleSubmit}>
-                <label className="block mb-1 text-sm text-gray-600">Notes</label>
-                <input type="text" placeholder='Username' value={loginData.username} onChange={e => setLoginData({ ...loginData, username: e.target.value })} required />
-                <input type="password" placeholder='Password' value={loginData.password} onChange={e => setLoginData({ ...loginData, password: e.target.value })} required />
+                <div className="card-wrap card">
+                    <div className="auth-cards flex flex-col items-center mx-3">
+                        <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
+                        <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
+                        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+                            <p className="mt-4 text-gray-600">{message}</p>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={loginData.username}
+                                onChange={e => setLoginData({ ...loginData, username: e.target.value })}
+                                required
+                                className="inputs"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={loginData.password}
+                                onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+                                required
+                                className="inputs"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-[#4f46e5] submit-btn"
+                            >
+                                <img src={Right} alt="" className='right-arr mr-2' />
+                                Login
+                            </button>
+                        </form>
 
-                <button type='submit'>Login</button>
-
-            </form>
-            <p>{message}</p>
+                        <p className='mt-4 '><span className="text-gray-400 font-500">Don't have an account?</span> <Link to="/register" className='text-blue-600'>SignUp</Link> </p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
