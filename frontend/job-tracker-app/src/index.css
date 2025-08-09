@@ -9,3 +9,50 @@
   background-size: cover;
   background-position: center;
 }
+.chart-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: auto;
+  canvas {
+    /* background: linear-gradient(to bottom, #f7d6fc, #fff); */
+    border-radius: 12px;
+  }
+}
+.chartjs-tooltip {
+  border-radius: 6px !important;
+  font-family: "Poppins", sans-serif;
+}
+/* loading spinner */
+.spinner-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* optional overlay */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3; /* Light gray */
+  border-top: 6px solid #4f46e5; /* Indigo color */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

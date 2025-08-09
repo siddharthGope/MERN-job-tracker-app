@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteJob, getJobs } from '../../../features/jobs/JobSlice'
 import JobForm from './JobForm'
 import JobCard from './JobCard'
+import Loading from '../../Chart/Loading'
 
 
 function JobList() {
@@ -21,7 +22,7 @@ function JobList() {
         dispatch(deleteJob(id))
     }
 
-    if (loading) return <p>Loading ....</p>
+    if (loading) return (<Loading />)
 
     return (
         <div>

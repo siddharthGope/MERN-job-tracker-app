@@ -50,7 +50,6 @@ function Authentication() {
             const { exp } = jwtDecode(token)
 
             const expiryTime = exp * 1000 - Date.now() //millisec
-            console.log(expiryTime);
 
             const timer = setTimeout(() => {
                 logOut()

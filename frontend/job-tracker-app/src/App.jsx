@@ -14,18 +14,24 @@ import { logOut } from "./services/authService";
 import Authentication from "./components/Auth/Authentication";
 import hamburger from "./assets/hamburger.svg";
 import close from './assets/close.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [openNav, setOpenNav] = useState(false);
+  const [token, setToken] = useState(null)
   const currentPathname = window.location.pathname;
   console.log(currentPathname);
   const navlinks = [
     { name: "See all jobs", path: "/jobs" },
     { name: "Dashboard", path: "/dashboard" },
-    // { name: "Register", path: '/' },
-    { name: "Signin/Login", path: "/" },
+    // { name: "Register", path: '/register' },
+    // { name: "Login", path: "/login" },
   ];
+
+  useEffect(() => {
+    const newToken = localStorage.getItem("token")
+    setToken(newToken)
+  }, [token]);
 
   return (
     <>
@@ -41,7 +47,7 @@ function App() {
             <div className="flex items-center gap-6">
               {navlinks.map((link, index) => (
                 <NavLink
-                  key={index}
+                  key={index + 1}
                   className={({ isActive }) =>
                     (isActive
                       ? "text-blue-600 border-b-2 border-blue-600"
@@ -53,12 +59,44 @@ function App() {
                   {link.name}
                 </NavLink>
               ))}
-              <button
-                className="text-sm font-medium px-2 py-1 rounded-md transition-all"
-                onClick={() => logOut()}
-              >
-                Log out
-              </button>
+
+              {
+                token ? (
+                  <>
+                    <NavLink className={({ isActive }) =>
+                      (isActive
+                        ? "text-blue-600 border-b-2 border-blue-600"
+                        : "text-gray-600 hover:text-blue-600") +
+                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                    } to="/dashboard">cDashboard</NavLink>
+                    <NavLink className={({ isActive }) =>
+                      (isActive
+                        ? "text-blue-600 border-b-2 border-blue-600"
+                        : "text-gray-600 hover:text-blue-600") +
+                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                    } to="/jobs">cAll Jobs</NavLink>
+
+                    <button
+                      className="text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      onClick={() => logOut()}
+                    >
+                      cLog out
+                    </button>
+                  </>
+
+
+                ) : (
+
+                  <NavLink className={({ isActive }) =>
+                    (isActive
+                      ? "text-blue-600 border-b-2 border-blue-600"
+                      : "text-gray-600 hover:text-blue-600") +
+                    " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                  } to="/login">Login</NavLink>
+
+                )
+              }
+
             </div>
           </div>
 

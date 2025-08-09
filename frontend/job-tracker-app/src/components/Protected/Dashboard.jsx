@@ -13,6 +13,9 @@ import {
 } from 'chart.js';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { getJobs, selectJobsByDate, selectJobsByStatus } from '../../features/jobs/JobSlice';
+import LineChart from '../Chart/LineChart';
+import BarChart from '../Chart/BarChart';
+import Loading from '../Chart/Loading';
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
@@ -26,6 +29,8 @@ function Dashboard() {
     }, [dispatch]);
 
 
+
+
     const jobsByStatus = useSelector(selectJobsByStatus)
     const jobsByDate = useSelector(selectJobsByDate)
 
@@ -37,10 +42,11 @@ function Dashboard() {
     const dateData = dateLabels.map((date) => jobsByDate[date])
 
 
+
     return (
         <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-8">
             {/* Pie Chart – Status */}
-            <div className="bg-white p-4 rounded-xl shadow">
+            {/* <div className="bg-white p-4 rounded-xl shadow">
                 <h2 className="text-center md:text-left text-xl font-semibold mb-2">Status Distribution</h2>
 
                 <Pie
@@ -55,44 +61,18 @@ function Dashboard() {
                         ]
                     }}
                 />
-            </div>
+            </div> */}
             {/* Bar Chart – Status Count */}
 
-            <div className="bg-white p-4 rounded-xl shadow">
-                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Applications by Status</h2>
-
-                <Bar data={{
-                    labels: statusLabels,
-                    datasets: [
-                        {
-                            label: "Count",
-                            data: statusData,
-                            backgroundColor: ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"],
-                        }
-                    ]
-                }} />
-            </div>
+            {
+                statusData.length > 0 && statusLabels.length > 0 ? (<BarChart statuses={statusData} sLabels={statusLabels} />) : (<Loading />)
+            }
 
             {/* Line Chart – Over Time */}
 
-            <div className="col-span-2 bg-white p-4 rounded-xl shadow">
-                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Applications Over Time</h2>
-
-                <Line
-                    data={{
-                        labels: dateLabels,
-                        datasets: [
-                            {
-                                label: "Applications",
-                                data: dateData,
-                                borderColor: "#10b981",
-                                backgroundColor: "#10b98133",
-                            }
-                        ]
-                    }}
-                />
-            </div>
-
+            {
+                dateLabels.length > 0 && dateData.length > 0 ? (<LineChart dLabels={dateLabels} dates={dateData} />) : (<Loading />)
+            }
         </div>
     )
 }
