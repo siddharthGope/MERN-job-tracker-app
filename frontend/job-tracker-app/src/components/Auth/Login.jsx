@@ -1,31 +1,43 @@
-import React, { useState } from 'react'
-import { login, logOut } from '../../services/authService';
+import React, { useEffect, useState } from 'react'
+import { logOut } from '../../services/authService';
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser, getUser } from '../../features/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import Right from '../../assets/right-arrow-icon.png';
+import Loading from "../../components/Chart/Loading"
 
 
 function Login() {
 
     const [loginData, setLoginData] = useState({ username: '', password: '' });
-    const [message, setMessage] = useState('');
+    // const [message, setMessage] = useState('');
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { loading, error } = useSelector((state) => state.auth)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
 
         e.preventDefault()
 
-        try {
-            const res = await login(loginData)
-            const token = res.data.token
-            localStorage.setItem('token', token)
-            setMessage('Login successful')
-            navigate('/dashboard')
-            runLogOutTimer()
-        } catch (error) {
-            setMessage(error.response?.data?.message || 'Login failed')
-        }
+        dispatch(loginUser(loginData)).unwrap()
+            .then((data) => {
+                const token = data.token
+                dispatch(getUser(token))
+                navigate('/dashboard')
+                runLogOutTimer()
+            }
+            )
+            .catch((err) => {
+                console.error("Login error", err);
+            })
     }
+
+
+
+    // useEffect(() => {
+    //     dispatch(getUser())
+    // }, [dispatch]);
 
     function runLogOutTimer() {
         const token = localStorage.getItem('token')
@@ -54,7 +66,7 @@ function Login() {
                         <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            <p className="mt-4 text-gray-600">{message}</p>
+                            {error && <p className="mt-4 text-gray-600">{error}</p>}
                             <input
                                 type="text"
                                 placeholder="Username"
@@ -71,13 +83,16 @@ function Login() {
                                 required
                                 className="inputs"
                             />
-                            <button
-                                type="submit"
-                                className="bg-[#4f46e5] submit-btn"
-                            >
-                                <img src={Right} alt="" className='right-arr mr-2' />
-                                Login
-                            </button>
+                            {
+                                loading ? (<Loading />) : (<button
+                                    type="submit"
+                                    className="bg-[#4f46e5] submit-btn"
+                                >
+                                    <img src={Right} alt="" className='right-arr mr-2' />
+                                    Login
+                                </button>)
+                            }
+
                         </form>
 
                         <p className='mt-4 '><span className="text-gray-400 font-500">Don't have an account?</span> <Link to="/register" className='text-blue-600'>SignUp</Link> </p>

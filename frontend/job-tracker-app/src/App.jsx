@@ -5,33 +5,26 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoutes from "./routing/PrivateRoutes";
 import Dashboard from "./components/Protected/Dashboard";
 import Jobs from "./components/Protected/Job/Jobs";
-import { logOut } from "./services/authService";
-import Authentication from "./components/Auth/Authentication";
+import { logOut } from "./features/auth/authSlice";
+// import Authentication from "./components/Auth/Authentication";
 import hamburger from "./assets/hamburger.svg";
 import close from './assets/close.svg';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
-  const [openNav, setOpenNav] = useState(false);
-  const [token, setToken] = useState(null)
-  const currentPathname = window.location.pathname;
-  console.log(currentPathname);
-  const navlinks = [
-    { name: "See all jobs", path: "/jobs" },
-    { name: "Dashboard", path: "/dashboard" },
-    // { name: "Register", path: '/register' },
-    // { name: "Login", path: "/login" },
-  ];
 
-  useEffect(() => {
-    const newToken = localStorage.getItem("token")
-    setToken(newToken)
-  }, [token]);
+  const { isAuthenticated, user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
+
+  const [openNav, setOpenNav] = useState(false);
+
 
   return (
     <>
@@ -45,58 +38,59 @@ function App() {
               </Link>
             </div>
             <div className="flex items-center gap-6">
-              {navlinks.map((link, index) => (
-                <NavLink
-                  key={index + 1}
-                  className={({ isActive }) =>
-                    (isActive
-                      ? "text-blue-600 border-b-2 border-blue-600"
-                      : "text-gray-600 hover:text-blue-600") +
-                    " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                  }
-                  to={link.path}
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-
               {
-                token ? (
+                isAuthenticated ? (
                   <>
                     <NavLink className={({ isActive }) =>
                       (isActive
                         ? "text-blue-600 border-b-2 border-blue-600"
                         : "text-gray-600 hover:text-blue-600") +
                       " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                    } to="/dashboard">cDashboard</NavLink>
+                    } to="/dashboard">Dashboard</NavLink>
                     <NavLink className={({ isActive }) =>
                       (isActive
                         ? "text-blue-600 border-b-2 border-blue-600"
                         : "text-gray-600 hover:text-blue-600") +
                       " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                    } to="/jobs">cAll Jobs</NavLink>
+                    } to="/jobs">All Jobs</NavLink>
+
+                    <span>Hello,{user}</span>
 
                     <button
                       className="text-sm font-medium px-2 py-1 rounded-md transition-all"
                       onClick={() => logOut()}
                     >
-                      cLog out
+                      Log out
                     </button>
                   </>
 
 
                 ) : (
 
-                  <NavLink className={({ isActive }) =>
-                    (isActive
-                      ? "text-blue-600 border-b-2 border-blue-600"
-                      : "text-gray-600 hover:text-blue-600") +
-                    " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                  } to="/login">Login</NavLink>
+                  <>
+                    <NavLink className={({ isActive }) =>
+                      (isActive
+                        ? "text-blue-600 border-b-2 border-blue-600"
+                        : "text-gray-600 hover:text-blue-600") +
+                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                    } to="/login">Login</NavLink>
+                    <NavLink className={({ isActive }) =>
+                      (isActive
+                        ? "text-blue-600 border-b-2 border-blue-600"
+                        : "text-gray-600 hover:text-blue-600") +
+                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                    } to="/register">Register</NavLink>
+                  </>
 
                 )
               }
 
+              {/* <button
+                className="text-sm font-medium px-2 py-1 rounded-md transition-all"
+                onClick={() => logOut()}
+              >
+                Log out
+              </button> */}
             </div>
           </div>
 
@@ -125,7 +119,7 @@ function App() {
 
             {openNav && (<div className=" bg-white h-full p-4 block md:hidden transition-all duration-500 ease-in-out transform">
               <div className="flex flex-col items-center gap-4">
-                {navlinks.map((link, index) => (
+                {/* {navlinks.map((link, index) => (
                   <div key={index}>
                     <NavLink
                       className={({ isActive }) =>
@@ -139,7 +133,7 @@ function App() {
                       {link.name}
                     </NavLink>
                   </div>
-                ))}
+                ))} */}
                 <button
                   className="text-sm font-medium px-2 py-1 rounded-md transition-all"
                   onClick={() => logOut()}
@@ -154,7 +148,7 @@ function App() {
           </div>
         </nav>
         <Routes>
-          <Route path="/" element={<Authentication />} />
+          <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<PrivateRoutes />}>

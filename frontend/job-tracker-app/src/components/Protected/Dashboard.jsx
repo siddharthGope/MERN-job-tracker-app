@@ -16,6 +16,7 @@ import { getJobs, selectJobsByDate, selectJobsByStatus } from '../../features/jo
 import LineChart from '../Chart/LineChart';
 import BarChart from '../Chart/BarChart';
 import Loading from '../Chart/Loading';
+import JobList from './Job/JobList';
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
@@ -73,6 +74,9 @@ function Dashboard() {
             {
                 dateLabels.length > 0 && dateData.length > 0 ? (<LineChart dLabels={dateLabels} dates={dateData} />) : (<Loading />)
             }
+
+
+            <JobList />
         </div>
     )
 }
