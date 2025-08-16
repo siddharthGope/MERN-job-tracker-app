@@ -12,7 +12,8 @@ const initialState = {
   token: token || null,
   isAuthenticated: !!token,
   loading: false,
-  error: null,
+  loginError: null,
+  regError: null,
 };
 
 // register user
@@ -86,7 +87,7 @@ const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.regError = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -96,12 +97,12 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.regError = action.payload;
       })
 
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.loginError = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -112,7 +113,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.loginError = action.payload;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload.username;

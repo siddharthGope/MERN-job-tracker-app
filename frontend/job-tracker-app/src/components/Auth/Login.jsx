@@ -14,7 +14,7 @@ function Login() {
     // const [message, setMessage] = useState('');
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { loading, error } = useSelector((state) => state.auth)
+    const { loading, loginError } = useSelector((state) => state.auth)
 
     const handleSubmit = (e) => {
 
@@ -33,11 +33,6 @@ function Login() {
             })
     }
 
-
-
-    // useEffect(() => {
-    //     dispatch(getUser())
-    // }, [dispatch]);
 
     function runLogOutTimer() {
         const token = localStorage.getItem('token')
@@ -66,7 +61,7 @@ function Login() {
                         <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            {error && <p className="mt-4 text-red-600">{error}</p>}
+                            {loginError && <p className="mt-4 text-red-600">{loginError}</p>}
                             <input
                                 type="text"
                                 placeholder="Username"

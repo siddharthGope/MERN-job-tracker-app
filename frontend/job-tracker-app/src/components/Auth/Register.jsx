@@ -15,7 +15,7 @@ function Register() {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { loading, error } = useSelector((state) => state.auth)
+    const { loading, regError } = useSelector((state) => state.auth)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ function Register() {
                         <h3 className="text-xl font-bold mb-2 text-[#136dff]">Register</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            {error && <p className="mt-4 text-red-600">{error}</p>}
+                            {regError && <p className="mt-4 text-red-600">{regError}</p>}
                             <input
                                 type="text"
                                 placeholder="Username"

@@ -5,172 +5,21 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoutes from "./routing/PrivateRoutes";
 import Dashboard from "./components/Protected/Dashboard";
 import Jobs from "./components/Protected/Job/Jobs";
-import { logOut } from "./features/auth/authSlice";
 // import Authentication from "./components/Auth/Authentication";
-import hamburger from "./assets/hamburger.svg";
-import close from './assets/close.svg';
-import { useState } from "react";
+import { ThemeProvider } from "./context/ThemeContext";
+import Navigation from './components/Navigation';
 
 function App() {
 
-  const { isAuthenticated, user } = useSelector((state) => state.auth)
-
-
-  const [openNav, setOpenNav] = useState(false);
-
-
   return (
-    <>
+    <ThemeProvider>
       <Router>
-        <nav className="bg-white shadow-md border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center hidden md:flex">
-            {/* Logo */}
-            <div>
-              <Link to="/" className="text-xl font-bold text-blue-600">
-                JobTrackr
-              </Link>
-            </div>
-            <div className="flex items-center gap-6">
-              {
-                isAuthenticated ? (
-                  <>
-                    <NavLink className={({ isActive }) =>
-                      (isActive
-                        ? "text-blue-600 border-b-2 border-blue-600"
-                        : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 transition-all"
-                    } to="/dashboard">Dashboard</NavLink>
-                    {/* <NavLink className={({ isActive }) =>
-                      (isActive
-                        ? "text-blue-600 border-b-2 border-blue-600"
-                        : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 transition-all"
-                    } to="/jobs">All Jobs</NavLink> */}
-
-                    <span className="text-sm font-medium px-2 py-1">Hello {user}</span>
-
-                    <button
-                      className="text-sm font-medium px-2 py-1 transition-all cursor-pointer"
-                      onClick={() => logOut()}
-                    >
-                      Log out
-                    </button>
-                  </>
-
-
-                ) : (
-
-                  <>
-                    <NavLink className={({ isActive }) =>
-                      (isActive
-                        ? "text-blue-600 border-b-2 border-blue-600"
-                        : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                    } to="/login">Login</NavLink>
-                    <NavLink className={({ isActive }) =>
-                      (isActive
-                        ? "text-blue-600 border-b-2 border-blue-600"
-                        : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                    } to="/register">Register</NavLink>
-                  </>
-
-                )
-              }
-
-              {/* <button
-                className="text-sm font-medium px-2 py-1 rounded-md transition-all"
-                onClick={() => logOut()}
-              >
-                Log out
-              </button> */}
-            </div>
-          </div>
-
-          <div className="mobile-nav block md:hidden">
-            <div className="flex justify-between items-center p-4 ">
-              <div className="block md:hidden">
-                <Link to="/" className="text-xl font-bold text-blue-600">
-                  JobTrackr
-                </Link>
-              </div>
-
-              <div className="block md:hidden">
-                <button onClick={() => setOpenNav(!openNav)} type="button">
-                  {openNav ? (<img
-                    src={close}
-                    alt="close"
-                    className="w-[20px]"
-                  />) : (<img
-                    src={hamburger}
-                    alt="hamburger"
-                    className="w-[20px]"
-                  />)}
-                </button>
-              </div>
-            </div>
-
-            {openNav && (<div className=" bg-white h-full p-4 block md:hidden transition-all duration-500 ease-in-out transform">
-              <div className="flex flex-col items-center gap-4">
-                {
-                  isAuthenticated ? (
-                    <>
-                      <NavLink className={({ isActive }) =>
-                        (isActive
-                          ? "text-blue-600 border-b-2 border-blue-600"
-                          : "text-gray-600 hover:text-blue-600") +
-                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                      } to="/dashboard">Dashboard</NavLink>
-                      <NavLink className={({ isActive }) =>
-                        (isActive
-                          ? "text-blue-600 border-b-2 border-blue-600"
-                          : "text-gray-600 hover:text-blue-600") +
-                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                      } to="/jobs">All Jobs</NavLink>
-
-                      <span>Hello,{user}</span>
-
-                      <button
-                        className="text-sm font-medium px-2 py-1 rounded-md transition-all"
-                        onClick={() => logOut()}
-                      >
-                        Log out
-                      </button>
-                    </>
-
-
-                  ) : (
-
-                    <>
-                      <NavLink className={({ isActive }) =>
-                        (isActive
-                          ? "text-blue-600 border-b-2 border-blue-600"
-                          : "text-gray-600 hover:text-blue-600") +
-                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                      } to="/login">Login</NavLink>
-                      <NavLink className={({ isActive }) =>
-                        (isActive
-                          ? "text-blue-600 border-b-2 border-blue-600"
-                          : "text-gray-600 hover:text-blue-600") +
-                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                      } to="/register">Register</NavLink>
-                    </>
-
-                  )
-                }
-              </div>
-            </div>
-
-            )}
-
-          </div>
-        </nav>
+        <Navigation />
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -181,7 +30,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 

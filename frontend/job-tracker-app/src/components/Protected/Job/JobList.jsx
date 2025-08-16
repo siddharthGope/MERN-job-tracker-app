@@ -23,6 +23,11 @@ function JobList() {
         dispatch(deleteJob(id))
     }
 
+    function editJob(job) {
+        setEditing(job)
+        setToggleForm(true)
+    }
+
     if (loading) return (<Loading />)
 
     return (
@@ -46,10 +51,7 @@ function JobList() {
             </ul>
         </div>
     )
-    function editJob(job) {
-        setEditing(job)
-        setToggleForm(true)
-    }
+
 }
 
 export default JobList

@@ -2,10 +2,10 @@
 export default function JobCard({ job, onEdit, onDelete }) {
     return (
         <div className="bg-white shadow-md rounded-xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between transition hover:shadow-lg border border-gray-100">
-            <div className="mb-4 sm:mb-0">
+            <div className="mb-4 sm:mb-0 flex items-center">
                 <h3 className="text-lg font-semibold text-gray-800">{job.title}</h3>
                 <p className="text-sm text-gray-500">{job.company}</p>
-                <p className="text-sm text-gray-400 mt-1">
+                <p className="text-sm text-gray-400">
                     Status: <span className="font-medium text-blue-600">{job.status}</span>
                 </p>
                 <p className="text-xs text-gray-400">Date: {new Date(job.date).toLocaleDateString()}</p>
