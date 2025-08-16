@@ -29,7 +29,7 @@ function Register() {
 
     return (
         <div className='min-h-screen bg-gray-100 bgauth'>
-            <div className="flex items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center pt-[150px]">
 
                 <div className="card-wrap card">
                     <img src={circle} alt="" className='bg-circle' />
@@ -37,7 +37,7 @@ function Register() {
                         <h3 className="text-xl font-bold mb-2 text-[#136dff]">Register</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            {error && <p className="mt-4 text-gray-600">{error}</p>}
+                            {error && <p className="mt-4 text-red-600">{error}</p>}
                             <input
                                 type="text"
                                 placeholder="Username"

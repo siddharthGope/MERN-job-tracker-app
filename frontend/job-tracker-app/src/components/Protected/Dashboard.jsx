@@ -17,6 +17,7 @@ import LineChart from '../Chart/LineChart';
 import BarChart from '../Chart/BarChart';
 import Loading from '../Chart/Loading';
 import JobList from './Job/JobList';
+import AddJob from './Job/AddJob';
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
@@ -45,9 +46,10 @@ function Dashboard() {
 
 
     return (
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-8">
-            {/* Pie Chart – Status */}
-            {/* <div className="bg-white p-4 rounded-xl shadow">
+        <>
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-8">
+                {/* Pie Chart – Status */}
+                {/* <div className="bg-white p-4 rounded-xl shadow">
                 <h2 className="text-center md:text-left text-xl font-semibold mb-2">Status Distribution</h2>
 
                 <Pie
@@ -63,21 +65,23 @@ function Dashboard() {
                     }}
                 />
             </div> */}
-            {/* Bar Chart – Status Count */}
+                {/* Bar Chart – Status Count */}
 
-            {
-                statusData.length > 0 && statusLabels.length > 0 ? (<BarChart statuses={statusData} sLabels={statusLabels} />) : (<Loading />)
-            }
+                {
+                    statusData.length > 0 && statusLabels.length > 0 ? (<BarChart statuses={statusData} sLabels={statusLabels} />) : (<Loading />)
+                }
 
-            {/* Line Chart – Over Time */}
+                {/* Line Chart – Over Time */}
 
-            {
-                dateLabels.length > 0 && dateData.length > 0 ? (<LineChart dLabels={dateLabels} dates={dateData} />) : (<Loading />)
-            }
+                {
+                    dateLabels.length > 0 && dateData.length > 0 ? (<LineChart dLabels={dateLabels} dates={dateData} />) : (<Loading />)
+                }
+            </div>
 
-
-            <JobList />
-        </div>
+            <div>
+                <JobList />
+            </div>
+        </>
     )
 }
 

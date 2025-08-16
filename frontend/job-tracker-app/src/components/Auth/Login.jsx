@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { logOut } from '../../services/authService';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, getUser } from '../../features/auth/authSlice';
@@ -57,16 +57,16 @@ function Login() {
 
 
     return (
-        <div className='min-h-screen bg-gray-100 bgauth'>
+        <div className='min-h-screen bg-gray-100 bgauth pt-[150px]'>
             {/* todo: todo form validation, land to all jobs page,conditional link show hide, change app name, more beautiful ui */}
-            <div className="flex items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center h-[100%]">
 
                 <div className="card-wrap card">
                     <div className="auth-cards flex flex-col items-center mx-3">
                         <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                            {error && <p className="mt-4 text-gray-600">{error}</p>}
+                            {error && <p className="mt-4 text-red-600">{error}</p>}
                             <input
                                 type="text"
                                 placeholder="Username"

@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoutes from "./routing/PrivateRoutes";
@@ -20,7 +20,6 @@ import { useState } from "react";
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
 
 
   const [openNav, setOpenNav] = useState(false);
@@ -45,19 +44,19 @@ function App() {
                       (isActive
                         ? "text-blue-600 border-b-2 border-blue-600"
                         : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      " text-sm font-medium px-2 py-1 transition-all"
                     } to="/dashboard">Dashboard</NavLink>
-                    <NavLink className={({ isActive }) =>
+                    {/* <NavLink className={({ isActive }) =>
                       (isActive
                         ? "text-blue-600 border-b-2 border-blue-600"
                         : "text-gray-600 hover:text-blue-600") +
-                      " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                    } to="/jobs">All Jobs</NavLink>
+                      " text-sm font-medium px-2 py-1 transition-all"
+                    } to="/jobs">All Jobs</NavLink> */}
 
-                    <span>Hello,{user}</span>
+                    <span className="text-sm font-medium px-2 py-1">Hello {user}</span>
 
                     <button
-                      className="text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      className="text-sm font-medium px-2 py-1 transition-all cursor-pointer"
                       onClick={() => logOut()}
                     >
                       Log out
@@ -119,27 +118,52 @@ function App() {
 
             {openNav && (<div className=" bg-white h-full p-4 block md:hidden transition-all duration-500 ease-in-out transform">
               <div className="flex flex-col items-center gap-4">
-                {/* {navlinks.map((link, index) => (
-                  <div key={index}>
-                    <NavLink
-                      className={({ isActive }) =>
+                {
+                  isAuthenticated ? (
+                    <>
+                      <NavLink className={({ isActive }) =>
                         (isActive
                           ? "text-blue-600 border-b-2 border-blue-600"
                           : "text-gray-600 hover:text-blue-600") +
                         " text-sm font-medium px-2 py-1 rounded-md transition-all"
-                      }
-                      to={link.path}
-                    >
-                      {link.name}
-                    </NavLink>
-                  </div>
-                ))} */}
-                <button
-                  className="text-sm font-medium px-2 py-1 rounded-md transition-all"
-                  onClick={() => logOut()}
-                >
-                  Log out
-                </button>
+                      } to="/dashboard">Dashboard</NavLink>
+                      <NavLink className={({ isActive }) =>
+                        (isActive
+                          ? "text-blue-600 border-b-2 border-blue-600"
+                          : "text-gray-600 hover:text-blue-600") +
+                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      } to="/jobs">All Jobs</NavLink>
+
+                      <span>Hello,{user}</span>
+
+                      <button
+                        className="text-sm font-medium px-2 py-1 rounded-md transition-all"
+                        onClick={() => logOut()}
+                      >
+                        Log out
+                      </button>
+                    </>
+
+
+                  ) : (
+
+                    <>
+                      <NavLink className={({ isActive }) =>
+                        (isActive
+                          ? "text-blue-600 border-b-2 border-blue-600"
+                          : "text-gray-600 hover:text-blue-600") +
+                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      } to="/login">Login</NavLink>
+                      <NavLink className={({ isActive }) =>
+                        (isActive
+                          ? "text-blue-600 border-b-2 border-blue-600"
+                          : "text-gray-600 hover:text-blue-600") +
+                        " text-sm font-medium px-2 py-1 rounded-md transition-all"
+                      } to="/register">Register</NavLink>
+                    </>
+
+                  )
+                }
               </div>
             </div>
 

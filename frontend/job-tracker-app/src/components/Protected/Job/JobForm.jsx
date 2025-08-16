@@ -4,7 +4,7 @@ import { createJob, updateJob } from '../../../features/jobs/JobSlice';
 import Right from '../../../assets/right-arrow-icon.png';
 
 
-function JobForm({ editJob, onComplete }) {
+function JobForm({ editJob, onComplete, onModalClose }) {
 
     const [form, setForm] = useState(editJob || { title: '', company: '', status: 'applied', date: '', notes: '' });
 
@@ -30,10 +30,12 @@ function JobForm({ editJob, onComplete }) {
 
             dispatch(updateJob({ id: editJob._id, ...form }))
             setForm({ title: '', company: '', status: 'applied', date: '', notes: '' })
+            onModalClose()
         }
         else {
             dispatch(createJob(form))
             setForm({ title: '', company: '', status: 'applied', date: '', notes: '' })
+            onModalClose()
         }
 
         onComplete?.()
