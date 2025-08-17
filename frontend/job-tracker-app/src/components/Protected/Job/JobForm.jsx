@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { createJob, updateJob } from '../../../features/jobs/JobSlice';
 import Right from '../../../assets/right-arrow-icon.png';
+import { useTheme } from '../../../context/ThemeContext';
 
 
 function JobForm({ editJob, onComplete, onModalClose }) {
@@ -41,11 +42,13 @@ function JobForm({ editJob, onComplete, onModalClose }) {
         onComplete?.()
     }
 
+    const { theme } = useTheme()
+
 
     return (
         <div>
 
-            <form onSubmit={handleSubmit} className="card bg-white shadow-md space-y-4 max-w-xl mx-auto">
+            <form onSubmit={handleSubmit} className={(theme === "dark" ? 'bg-[#282828] text-white' : 'bg-[#282828] text-white') + ' card shadow-md space-y-4 max-w-xl mx-auto'}>
                 {/* Title */}
                 <h2 className="text-2xl font-semibold text-[#4f46e5] mb-4 mt-4 text-center text-bold">
                     {editJob ? "Edit Job" : "Add Job"}
@@ -70,12 +73,6 @@ function JobForm({ editJob, onComplete, onModalClose }) {
                     <input type="date" placeholder='Date' value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
-                {/* Notes */}
-                <div>
-                    <label className="block mb-1 text-sm text-gray-600 text-bold">Notes</label>
-                    <textarea type="text" placeholder='Add additional notes' value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
-                </div>
-
                 {/* Status */}
                 <div>
                     <select value={form.status} onChange={e => { setForm({ ...form, status: e.target.value }) }} className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -85,6 +82,13 @@ function JobForm({ editJob, onComplete, onModalClose }) {
                         <option value='rejected'> <span className='selections'>Rejected</span> </option>
                     </select>
                 </div>
+
+                {/* Notes */}
+                <div>
+                    <label className="block mb-1 text-sm text-gray-600 text-bold">Notes</label>
+                    <textarea type="text" placeholder='Add additional notes' value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+                </div>
+
                 <button type='submit' className='submit-btn bg-[#4f46e5]'> <span>{editJob ? 'Update' : 'Create'}</span> <img src={Right} alt="" className='right-arr ml-2' /> </button>
 
             </form>

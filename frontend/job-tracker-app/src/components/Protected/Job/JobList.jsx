@@ -4,6 +4,7 @@ import { deleteJob, getJobs } from '../../../features/jobs/JobSlice'
 import JobForm from './JobForm'
 import JobCard from './JobCard'
 import Loading from '../../Chart/Loading'
+import { useTheme } from '../../../context/ThemeContext'
 
 
 function JobList() {
@@ -27,13 +28,14 @@ function JobList() {
         setEditing(job)
         setToggleForm(true)
     }
+    const { theme } = useTheme()
 
     if (loading) return (<Loading />)
 
     return (
-        <div>
+        <div className={(theme === "dark" ? 'bg-[#474646] text-white' : 'bg-white text-black')}>
             <div className="add-job">
-                <button onClick={() => setToggleForm(true)} className="bg-blue-600 text-white py-1 px-2 rounded cursor-pointer">Add new entry <span className="text-bold">+</span></button>
+                <button onClick={() => setToggleForm(true)} className="bg-blue-600 font-semibold text-white py-1 px-2 rounded cursor-pointer">Add new entry <span className="text-bold">+</span></button>
             </div>
 
 
@@ -43,7 +45,7 @@ function JobList() {
             </div>}
 
             <ul>
-                <h2 className='text-xl font-semibold text-gray-800 mb-4 mt-4 text-center'>Job Applications</h2>
+                <h2 className='text-xl font-semibold mb-4 mt-4 text-center'>Job Applications</h2>
                 {jobs && jobs.length > 0 && jobs.map(job => (
                     <JobCard key={job._id} job={job} onEdit={(job) => editJob(job)} onDelete={(id) => handleDelete(id)} onModalOpen={() => setToggleForm(true)} />
 

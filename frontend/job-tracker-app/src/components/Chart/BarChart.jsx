@@ -18,7 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineEleme
 function BarChart({ statuses, sLabels }) {
     return (
         <div className="chart-card">
-            <h2 className="text-center md:text-left text-xl font-semibold mb-2">Applications by Status</h2>
+            <h2 className="text-center md:text-left text-sm font-semibold mb-2">Applications by Status</h2>
 
             <Bar data={{
                 labels: sLabels,

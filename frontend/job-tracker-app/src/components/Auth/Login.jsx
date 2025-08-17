@@ -56,7 +56,7 @@ function Login() {
             {/* todo: todo form validation, land to all jobs page,conditional link show hide, change app name, more beautiful ui */}
             <div className="flex items-center justify-center h-[100%]">
 
-                <div className="card-wrap card">
+                <div className="card-wrap card bg-gray-300">
                     <div className="auth-cards flex flex-col items-center mx-3">
                         <h3 className="text-xl font-bold mb-2 text-[#4f46e5]">Login</h3>
                         <p className="text-sm font-medium mb-6 text-gray-400" >Join and organize your future opportunities now!</p>

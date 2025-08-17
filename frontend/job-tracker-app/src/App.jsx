@@ -1,25 +1,28 @@
 import {
-  Link,
-  NavLink,
   Route,
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import Register from "./components/Auth/Register";
-import Login from "./components/Auth/Login";
-import PrivateRoutes from "./routing/PrivateRoutes";
-import Dashboard from "./components/Protected/Dashboard";
-import Jobs from "./components/Protected/Job/Jobs";
-// import Authentication from "./components/Auth/Authentication";
+import { lazy, Suspense } from "react";
+const Register = lazy(() => import("./components/Auth/Register"))
+const Login = lazy(() => import("./components/Auth/Login"))
+const PrivateRoutes = lazy(() => import("./routing/PrivateRoutes"))
+const Dashboard = lazy(() => import("./components/Protected/Dashboard"))
+const Jobs = lazy(() => import("./components/Protected/Job/Jobs"))
+const Navigation = lazy(() => import('./components/Navigation'))
+
 import { ThemeProvider } from "./context/ThemeContext";
-import Navigation from './components/Navigation';
+
 
 function App() {
+
 
   return (
     <ThemeProvider>
       <Router>
-        <Navigation />
+        <Suspense>
+          <Navigation />
+        </Suspense>
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />

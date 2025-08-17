@@ -77,7 +77,7 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
     },
     setCredentials: (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload.username;
       state.token = action.payload.token;
       state.isAuthenticated = true;
     },
@@ -106,7 +106,6 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        // state.user = action.payload.user;
         state.token = action.payload.token;
         localStorage.setItem("token", action.payload.token);
         state.isAuthenticated = true;

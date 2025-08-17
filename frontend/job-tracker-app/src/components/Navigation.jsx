@@ -6,7 +6,7 @@ import {
     BrowserRouter as Router,
     Routes,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../features/auth/authSlice";
 import hamburger from "../assets/hamburger.svg";
 import close from '../assets/close.svg';
@@ -16,12 +16,13 @@ import { useTheme } from '../context/ThemeContext';
 function Navigation() {
 
     const { isAuthenticated, user } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
     const [openNav, setOpenNav] = useState(false);
     const { theme, toggleTheme } = useTheme()
 
     return (
         <div>
-            <nav className="bg-white shadow-md border-b border-gray-100">
+            <nav className={(theme === "dark" ? 'bg-[#333] text-white' : 'bg-white text-black border-b border-gray-100') + " shadow-md "} >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center hidden md:flex">
                     {/* Logo */}
                     <div>

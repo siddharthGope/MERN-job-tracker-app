@@ -31,7 +31,7 @@ function Register() {
         <div className='min-h-screen bg-gray-100 bgauth'>
             <div className="flex items-center justify-center pt-[150px]">
 
-                <div className="card-wrap card">
+                <div className="card-wrap card  bg-gray-300">
                     <img src={circle} alt="" className='bg-circle' />
                     <div className="auth-cards flex flex-col items-center mx-3">
                         <h3 className="text-xl font-bold mb-2 text-[#136dff]">Register</h3>
