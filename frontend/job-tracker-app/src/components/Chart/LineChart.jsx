@@ -43,7 +43,7 @@ const LineChart = ({ dLabels, dates }) => {
 
     return (
         <div className="chart-card">
-            <h2 className="text-center md:text-left text-sm font-semibold mb-2">Applications Over Time</h2>
+            <h3 className="text-center md:text-left text-sm font-semibold mb-2 text-black">Applications Over Time</h3>
 
             <Line
                 data={{
