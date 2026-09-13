@@ -99,7 +99,7 @@ const jobSlice = createSlice({
       //delete job
 
       .addCase(deleteJob.fulfilled, (state, action) => {
-        console.log(action.payload.id);
+        // console.log(action.payload.id);
         state.jobs = state.jobs.filter((job) => job._id !== action.payload.id);
       });
   },

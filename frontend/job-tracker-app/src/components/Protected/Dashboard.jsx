@@ -60,49 +60,41 @@ function Dashboard() {
         className={
           (theme === "dark"
             ? "bg-[#474646] text-white"
-            : "bg-white text-black") +
-          " px-2"
+            : "bg-white text-black") + " px-2"
         }
       >
-        <h1 className="font-bold">Job applications statistics </h1>
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 pt-8">
-          {/* Bar Chart – Status Count */}
+        {/* <h1 className="font-bold">Job applications statistics </h1> */}
+        <div className="grid grid-cols-2 gap-4 px-2">
+          {/* job list */}
+          <div className="0">
+            <JobList />
+          </div>
+          {/* Charts */}
+          <div className="basis">
+            <div className="grid grid-cols md:grid-cols-2 gap-8 pt-8">
+            <div>
+              {/* Bar Chart – Status Count */}
 
-          {statusData.length > 0 && statusLabels.length > 0 ? (
-            <BarChart statuses={statusData} sLabels={statusLabels} />
-          ) : (
-            <Loading />
-          )}
+              {statusData.length > 0 && statusLabels.length > 0 ? (
+                <BarChart statuses={statusData} sLabels={statusLabels} />
+              ) : (
+                <Loading />
+              )}
+            </div>
+              
 
-          {/* Line Chart – Over Time */}
+              <div>
+                {/* Line Chart – Over Time */}
 
-          {dateLabels.length > 0 && dateData.length > 0 ? (
-            <LineChart dLabels={dateLabels} dates={dateData} />
-          ) : (
-            <Loading />
-          )}
-          {/* Pie Chart – Status */}
-          {/* <div className="bg-white p-4 rounded-xl shadow">
-                <h2 className="text-center md:text-left text-xl font-semibold mb-2">Status Distribution</h2>
-
-                <Pie
-                    data={{
-                        labels: statusLabels,
-                        datasets: [
-                            {
-                                label: "Applications",
-                                data: statusData,
-                                backgroundColor: ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"],
-                            }
-                        ]
-                    }}
-                />
-            </div> */}
+              {dateLabels.length > 0 && dateData.length > 0 ? (
+                <LineChart dLabels={dateLabels} dates={dateData} />
+              ) : (
+                <Loading />
+              )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div>
-        <JobList />
       </div>
     </>
   );
